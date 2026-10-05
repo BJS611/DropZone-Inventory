@@ -137,6 +137,18 @@ Route::get('/deploy/diag', function () {
     }
 });
 
+Route::get('/deploy/seed', function () {
+    abort_if(request()->query('token') !== config('app.key'), 403);
+
+    try {
+        Artisan::call('db:seed', ['--force' => true]);
+
+        return response()->json(['status' => 'ok', 'output' => Artisan::output()]);
+    } catch (Throwable $e) {
+        return response()->json(['status' => 'error', 'class' => $e::class, 'message' => $e->getMessage(), 'line' => $e->getLine()]);
+    }
+});
+
 // ponytail: one-shot deploy migration runner. Delete after first successful run.
 Route::get('/deploy/migrate', function () {
     abort_if(request()->query('token') !== config('app.key'), 403);
