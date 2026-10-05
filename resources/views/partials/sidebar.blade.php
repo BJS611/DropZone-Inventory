@@ -18,7 +18,7 @@
 <div
     x-data="{ open: false }"
     x-on:keydown.escape.window="open = false"
-    class="fixed inset-0 z-40 lg:z-auto"
+    class="contents"
 >
     <div
         x-show="open"
