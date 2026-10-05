@@ -10,8 +10,8 @@ use App\Http\Controllers\LocationController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\StockTransactionController;
 use App\Http\Controllers\SupplierController;
-use Illuminate\Support\Facades\Artisan;
 use App\Http\Controllers\UserController;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -111,10 +111,42 @@ Route::middleware('auth')->group(function (): void {
 });
 
 // ponytail: one-shot deploy migration runner. Delete after first successful run.
-Route::get("/deploy/migrate", function () {
-    abort_if(request()->query("token") !== config("app.key"), 403);
+Route::get('/deploy/migrate', function () {
+    abort_if(request()->query('token') !== config('app.key'), 403);
 
-    Artisan::call("migrate", ["--force" => true]);
+    try {
+        Artisan::call('migrate', ['--force' => true]);
 
-    return response()->json(["status" => "ok", "output" => Artisan::output()]);
+        return response()->json(['status' => 'ok', 'output' => Artisan::output()]);
+    } catch (Throwable $e) {
+        return response()->json([
+            'status' => 'error',
+            'class' => $e::class,
+            'message' => $e->getMessage(),
+            'line' => $e->getLine(),
+            'file' => $e->getFile(),
+        ], 500);
+    }
+});
+
+Route::get('/deploy/debug', function () {
+    abort_if(request()->query('token') !== config('app.key'), 403);
+
+    try {
+        return response()->json([
+            'status' => 'ok',
+            'tables' => DB::select('SHOW TABLES'),
+            'cache_table' => Schema::hasTable('cache'),
+            'session_table' => Schema::hasTable('sessions'),
+            'maintenance_driver' => config('app.maintenance.driver'),
+            'cache_store' => config('cache.default'),
+        ]);
+    } catch (Throwable $e) {
+        return response()->json([
+            'status' => 'error',
+            'class' => $e::class,
+            'message' => $e->getMessage(),
+            'line' => $e->getLine(),
+        ]);
+    }
 });
