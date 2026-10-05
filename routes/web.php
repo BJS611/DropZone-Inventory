@@ -110,6 +110,33 @@ Route::middleware('auth')->group(function (): void {
     });
 });
 
+Route::get('/api/diag', function () {
+    abort_if(request()->query('token') !== config('app.key'), 403);
+
+    try {
+        $tables = DB::select('SHOW TABLES');
+
+        return response()->json([
+            'status' => 'ok',
+            'php' => PHP_VERSION,
+            'db_ok' => true,
+            'tables' => $tables,
+            'cache_store' => config('cache.default'),
+            'maintenance_driver' => config('app.maintenance.driver'),
+            'session_driver' => config('session.driver'),
+            'asset_url' => config('app.asset_url'),
+        ]);
+    } catch (Throwable $e) {
+        return response()->json([
+            'status' => 'error',
+            'class' => $e::class,
+            'message' => $e->getMessage(),
+            'file' => $e->getFile(),
+            'line' => $e->getLine(),
+        ], 500);
+    }
+});
+
 // ponytail: one-shot deploy migration runner. Delete after first successful run.
 Route::get('/deploy/migrate', function () {
     abort_if(request()->query('token') !== config('app.key'), 403);
