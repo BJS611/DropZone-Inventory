@@ -1,0 +1,11 @@
+@media (min-width: 1024px) {
+    .dz-sidebar {
+        position: fixed;
+        inset-inline-start: 0;
+        inset-block: 0;
+        width: 16rem;
+    }
+    .dz-main {
+        margin-inline-start: 16rem;
+    }
+}
