@@ -119,8 +119,22 @@ return [
     */
 
     'maintenance' => [
-        'driver' => env('APP_MAINTENANCE_DRIVER', 'file'),
+        'driver' => env('APP_MAINTENANCE_DRIVER', 'cache'),
         'store' => env('APP_MAINTENANCE_STORE', 'database'),
     ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Cache Paths (Vercel: read-only FS, redirect to /tmp)
+    |--------------------------------------------------------------------------
+    */
+
+    'view_paths' => [resource_path('views')],
+    'config_cache_path' => env('APP_CONFIG_CACHE', '/tmp/config.php'),
+    'events_cache_path' => env('APP_EVENTS_CACHE', '/tmp/events.php'),
+    'packages_cache_path' => env('APP_PACKAGES_CACHE', '/tmp/packages.php'),
+    'routes_cache_path' => env('APP_ROUTES_CACHE', '/tmp/routes.php'),
+    'services_cache_path' => env('APP_SERVICES_CACHE', '/tmp/services.php'),
+    'compiled_view_path' => env('VIEW_COMPILED_PATH', '/tmp'),
 
 ];

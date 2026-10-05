@@ -10,6 +10,7 @@ use App\Http\Controllers\LocationController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\StockTransactionController;
 use App\Http\Controllers\SupplierController;
+use Illuminate\Support\Facades\Artisan;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -107,4 +108,13 @@ Route::middleware('auth')->group(function (): void {
         Route::get('audit', [AuditLogController::class, 'index'])->name('audit.index');
         Route::get('audit/{auditLog}', [AuditLogController::class, 'show'])->name('audit.show');
     });
+});
+
+// ponytail: one-shot deploy migration runner. Delete after first successful run.
+Route::get("/deploy/migrate", function () {
+    abort_if(request()->query("token") !== config("app.key"), 403);
+
+    Artisan::call("migrate", ["--force" => true]);
+
+    return response()->json(["status" => "ok", "output" => Artisan::output()]);
 });
