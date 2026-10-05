@@ -110,7 +110,7 @@ Route::middleware('auth')->group(function (): void {
     });
 });
 
-Route::get('/api/diag', function () {
+Route::get('/deploy/diag', function () {
     abort_if(request()->query('token') !== config('app.key'), 403);
 
     try {
