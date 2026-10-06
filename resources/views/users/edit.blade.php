@@ -4,7 +4,7 @@
     <main class="space-y-6 p-6">
         <x-dz-alert tone="error" />
 
-        <form method="POST" :action="route('users.update', $user)" class="dz-card max-w-2xl space-y-6 p-6">
+        <form method="POST" action="{{ route('users.update', $user) }}" class="dz-card max-w-2xl space-y-6 p-6">
             @csrf
             @method('PUT')
 
@@ -33,7 +33,7 @@
         </form>
 
         @can('resetPassword', $user)
-            <form method="POST" :action="route('users.reset-password', $user)" class="dz-card max-w-2xl space-y-6 p-6">
+            <form method="POST" action="{{ route('users.reset-password', $user) }}" class="dz-card max-w-2xl space-y-6 p-6">
                 @csrf
                 <h2 class="dz-heading text-2xl">Reset Password</h2>
                 <div class="grid grid-cols-1 gap-5 md:grid-cols-2">

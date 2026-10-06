@@ -2,7 +2,7 @@
     <x-page-header title="Audit Log" :subtitle="'Riwayat operasi penting'" />
 
     <main class="space-y-6 p-6">
-        <form method="GET" :action="route('audit.index')" class="dz-card p-4">
+        <form method="GET" action="{{ route('audit.index') }}" class="dz-card p-4">
             <div class="flex flex-col gap-3 md:flex-row md:items-end">
                 <div class="flex-1">
                     <label for="dz-aud-search" class="dz-label">Cari</label>

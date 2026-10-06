@@ -78,7 +78,7 @@
                 <h2 class="dz-heading text-2xl">Operasi Stok</h2>
 
                 @can('stockIn', $item)
-                    <form id="dz-stock-in" method="POST" :action="route('items.stock-in', $item)" class="space-y-3 border-b border-line pb-4">
+                    <form id="dz-stock-in" method="POST" action="{{ route('items.stock-in', $item) }}" class="space-y-3 border-b border-line pb-4">
                         @csrf
                         <label for="dz-in-qty" class="dz-label">Stok Masuk</label>
                         <div class="flex gap-2">
@@ -90,7 +90,7 @@
                 @endcan
 
                 @can('stockOut', $item)
-                    <form method="POST" :action="route('items.stock-out', $item)" class="space-y-3 border-b border-line pb-4">
+                    <form method="POST" action="{{ route('items.stock-out', $item) }}" class="space-y-3 border-b border-line pb-4">
                         @csrf
                         <label for="dz-out-qty" class="dz-label">Stok Keluar</label>
                         <div class="flex gap-2">
@@ -102,7 +102,7 @@
                 @endcan
 
                 @can('adjust', $item)
-                    <form method="POST" :action="route('items.adjust', $item)" class="space-y-3 border-b border-line pb-4">
+                    <form method="POST" action="{{ route('items.adjust', $item) }}" class="space-y-3 border-b border-line pb-4">
                         @csrf
                         <label for="dz-adj" class="dz-label">Penyesuaian Stok</label>
                         <div class="flex gap-2">
@@ -114,7 +114,7 @@
                 @endcan
 
                 @can('transfer', $item)
-                    <form method="POST" :action="route('items.transfer', $item)" class="space-y-3">
+                    <form method="POST" action="{{ route('items.transfer', $item) }}" class="space-y-3">
                         @csrf
                         <label for="dz-trf-to" class="dz-label">Transfer Lokasi</label>
                         <select id="dz-trf-to" name="to_location_id" class="dz-input" required>

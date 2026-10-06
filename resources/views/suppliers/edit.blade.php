@@ -4,7 +4,7 @@
     <main class="p-6">
         <x-dz-alert tone="error" />
 
-        <form method="POST" :action="route('suppliers.update', $supplier)" class="dz-card max-w-2xl space-y-6 p-6">
+        <form method="POST" action="{{ route('suppliers.update', $supplier) }}" class="dz-card max-w-2xl space-y-6 p-6">
             @csrf
             @method('PUT')
 

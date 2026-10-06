@@ -5,7 +5,8 @@
             @can('cancel', $borrowing)
                 @if (! in_array($borrowing->status->value, ['RETURNED', 'CANCELLED']))
                     <x-dz-confirm
-                        :action="route('borrowings.cancel', $borrowing)"
+                        action="{{ route('borrowings.cancel', $borrowing) }}"
+                        method="POST"
                         label="Batalkan"
                         confirm="CANCEL"
                         placeholder="CANCEL"
@@ -101,7 +102,7 @@
                                         @if ($borrowingItem->remainingQuantity() > 0)
                                             <form
                                                 method="POST"
-                                                :action="route('borrowings.items.return', [$borrowing, $borrowingItem])"
+                                                action="{{ route('borrowings.items.return', [$borrowing, $borrowingItem]) }}"
                                                 class="flex items-center justify-end gap-2"
                                             >
                                                 @csrf

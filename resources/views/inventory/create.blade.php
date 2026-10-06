@@ -4,7 +4,7 @@
     <main class="p-6">
         <x-dz-alert tone="error" />
 
-        <form method="POST" :action="route('items.store')" class="dz-card max-w-4xl space-y-8 p-6">
+        <form method="POST" action="{{ route('items.store') }}" class="dz-card max-w-4xl space-y-8 p-6">
             @csrf
 
             <section>

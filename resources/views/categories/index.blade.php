@@ -11,7 +11,7 @@
         <x-dz-alert tone="success" />
         <x-dz-alert tone="error" />
 
-        <form method="GET" :action="route('categories.index')" class="dz-card p-4">
+        <form method="GET" action="{{ route('categories.index') }}" class="dz-card p-4">
             <div class="flex flex-col gap-3 md:flex-row md:items-end">
                 <div class="flex-1">
                     <label for="dz-cat-search" class="dz-label">Cari</label>
@@ -43,7 +43,7 @@
                                         @endcan
                                         @can('delete', $category)
                                             <x-dz-confirm
-                                                :action="route('categories.destroy', $category)"
+                                                action="{{ route('categories.destroy', $category) }}"
                                                 label="Hapus"
                                                 title="Hapus Kategori"
                                                 :message="'Kategori \"' . $category->name . '\" akan dihapus permanen.'"

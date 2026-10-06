@@ -12,7 +12,7 @@
         <x-dz-alert tone="success" />
         <x-dz-alert tone="error" />
 
-        <form method="GET" :action="route('borrowings.index')" class="dz-card p-4">
+        <form method="GET" action="{{ route('borrowings.index') }}" class="dz-card p-4">
             <div class="flex flex-col gap-3 md:flex-row md:items-end">
                 <div class="flex-1">
                     <label for="dz-brw-search" class="dz-label">Cari</label>

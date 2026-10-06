@@ -7,7 +7,7 @@
     </x-page-header>
 
     <main class="space-y-6 p-6">
-        <form method="GET" :action="route('reports.transactions')" class="dz-card p-4">
+        <form method="GET" action="{{ route('reports.transactions') }}" class="dz-card p-4">
             <div class="flex flex-col gap-3 md:flex-row md:items-end">
                 <div class="md:w-48">
                     <label for="dz-rt-type" class="dz-label">Tipe</label>

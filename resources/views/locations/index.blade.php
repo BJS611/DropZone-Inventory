@@ -11,7 +11,7 @@
         <x-dz-alert tone="success" />
         <x-dz-alert tone="error" />
 
-        <form method="GET" :action="route('locations.index')" class="dz-card p-4">
+        <form method="GET" action="{{ route('locations.index') }}" class="dz-card p-4">
             <div class="flex flex-col gap-3 md:flex-row md:items-end">
                 <div class="flex-1">
                     <label for="dz-loc-search" class="dz-label">Cari</label>
@@ -42,7 +42,7 @@
                                         @endcan
                                         @can('delete', $location)
                                             <x-dz-confirm
-                                                :action="route('locations.destroy', $location)"
+                                                action="{{ route('locations.destroy', $location) }}"
                                                 label="Hapus"
                                                 title="Hapus Lokasi"
                                                 :message="'Lokasi \"' . $location->name . '\" akan dihapus permanen.'"

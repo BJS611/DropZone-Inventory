@@ -9,7 +9,7 @@
         <x-dz-alert tone="success" />
         <x-dz-alert tone="error" />
 
-        <form method="GET" :action="route('users.index')" class="dz-card p-4">
+        <form method="GET" action="{{ route('users.index') }}" class="dz-card p-4">
             <div class="flex flex-col gap-3 md:flex-row md:items-end">
                 <div class="flex-1">
                     <label for="dz-user-search" class="dz-label">Cari</label>
@@ -39,7 +39,7 @@
                                     <div class="flex items-center justify-end gap-2">
                                         <a href="{{ route('users.edit', $user) }}" class="dz-btn dz-btn-secondary dz-btn-sm">Edit</a>
                                         @can('deactivate', $user)
-                                            <form method="POST" :action="route('users.toggle-status', $user)" class="inline">
+                                            <form method="POST" action="{{ route('users.toggle-status', $user) }}" class="inline">
                                                 @csrf
                                                 @if ($user->status === \App\Enums\UserStatus::ACTIVE)
                                                     <button type="submit" class="dz-btn dz-btn-danger dz-btn-sm" onclick="return confirm('Nonaktifkan user ini?')">Nonaktifkan</button>

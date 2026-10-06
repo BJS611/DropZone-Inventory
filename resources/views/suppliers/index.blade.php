@@ -11,7 +11,7 @@
         <x-dz-alert tone="success" />
         <x-dz-alert tone="error" />
 
-        <form method="GET" :action="route('suppliers.index')" class="dz-card p-4">
+        <form method="GET" action="{{ route('suppliers.index') }}" class="dz-card p-4">
             <div class="flex flex-col gap-3 md:flex-row md:items-end">
                 <div class="flex-1">
                     <label for="dz-sup-search" class="dz-label">Cari</label>
@@ -44,7 +44,7 @@
                                         @endcan
                                         @can('delete', $supplier)
                                             <x-dz-confirm
-                                                :action="route('suppliers.destroy', $supplier)"
+                                                action="{{ route('suppliers.destroy', $supplier) }}"
                                                 label="Hapus"
                                                 title="Hapus Supplier"
                                                 :message="'Supplier \"' . $supplier->name . '\" akan dihapus permanen.'"

@@ -1,5 +1,6 @@
 @props([
     'action' => null,
+    'method' => 'DELETE',
     'label' => 'Hapus',
     'tone' => 'danger',
     'confirm' => 'DELETE',
@@ -55,6 +56,9 @@
 
             <form method="POST" action="{{ $action }}" @submit.prevent="if (confirmation === '{{ $confirm }}') $el.submit()">
                 @csrf
+                @if (strtoupper($method) !== 'POST')
+                    @method($method)
+                @endif
                 <div class="px-6 py-5">
                     <p class="text-sm text-ink-2">{{ $message }}</p>
                     <p class="mt-3 text-sm text-ink-2">
